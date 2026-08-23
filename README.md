@@ -1,27 +1,87 @@
-# 南囡囝共生元体系
+# 南囡囝共生元
 
-## 编译方式
+> 完全自主可控的软件体系：用范畴论替代指令集，类型包含内容，不是指令操作数据。
 
-### Zig 编译（推荐）
+## 核心原则
+
+- **零外部依赖**：不依赖 gcc、不依赖命令行、不依赖外部生态
+- **范畴论替代指令**：偏旁=范畴，笔画=态射，造字=范畴合成
+- **容器自包含**：每个容器有自己的编码系统，不被单一编码统治
+- **自举路径**：C 是第一个扳手 → 造出自己的扳手 → 扔掉 C
+
+## 文件结构
+
+| 文件 | 说明 |
+|------|------|
+| `nan.c` | 最小 C 解释器（自举第一步） |
+| `boot.nan` | 启动脚本（nan 字节码） |
+| `build.zig` | Zig 构建文件（替代 gcc） |
+| `nan_coder.nim` | 零维符号编码系统 v0.8 |
+| `nan_category.nim` | 范畴论类型系统 v0.1 |
+| `nan_microkernel.nim` | 微内核 v0.1 |
+| `nan_character.nim` | 造字范畴论 v0.2 |
+
+## 编译运行
+
+### 用 Zig 编译 C 解释器（不需要 gcc）
+
 ```bash
-zig build-exe nan.c
-./nan boot.nan
+# 方式一：直接编译
+zig build-exe nan.c -o nan
+
+# 方式二：用构建脚本
+zig build
+zig build run -- boot.nan
 ```
 
-### Nim 编译
+### 编译 Nim 范畴论模块
+
 ```bash
-nim c -r nan_coder.nim
-nim c -r nan_category.nim
-nim c -r nan_microkernel.nim
+# 造字范畴论演示
+nim compile --run nan_character.nim
+
+# 编码系统
+nim compile --run nan_coder.nim
+
+# 微内核
+nim compile --run nan_microkernel.nim
 ```
 
-## 文件说明
+## 造字范畴论
 
-- nan.c         - 自举起点，C代码，Zig编译
-- boot.nan      - 启动脚本
-- nan_coder.nim - 码位进制+零维符号+微内核 v0.8
-- nan_category.nim - 范畴论编码系统 v0.1
-- nan_microkernel.nim - 微内核核心 v0.1
+### 核心模型
 
-## 自举路径
-C(Zig编译) → nan解释器 → boot.nan → 生成更多代码 → 扔掉C
+```
+偏旁 = 范畴（类型）
+笔画 = 态射（关系/变换）
+造字 = 范畴合成（A + B → C）
+声母韵母 = 音义索引
+```
+
+### 示例
+
+```
+人 + 木 = 休（人靠树=休息）
+女 + 子 = 好（女子=美好）
+日 + 月 = 明（日月同辉=光明）
+火 + 火 = 炎（火上加火=炎热）
+人 + 言 = 信（人说话算话=信用）
+```
+
+### 64码位零维符号表
+
+6位编码，每码位对应一个基础符号：
+- 基本笔画（一丨丿㇏𠃍丶㇀亅）
+- 自然元素（日月水火木土石金）
+- 人称（人女子口手心目足）
+- 方位、动作、状态、关系
+
+## 自举路线
+
+1. **现在**：C 解释器 + Nim 范畴论原型
+2. **下一步**：用 nan 解释器实现 Nim 范畴论的核心
+3. **最终**：扔掉 C，完全自举
+
+## 许可证
+
+无许可证。这是你自己的体系，规则由你定义。
