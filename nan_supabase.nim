@@ -16,9 +16,10 @@
 # ============================================
 # 云端凭证（主人专属，不泄露给外部）
 # ============================================
+#   发布密钥: sb_publishable_zKGC1a3xHlab0ttC69Iv7Q_8cEm8gix （可公开，用户用这个）
+#   私密密钥: 仅存在主人记忆中，永不写入代码文件
 const 云端URL* = "https://ibtwavmrefrrvrpnllmf.supabase.co"
 const 云端发布密钥* = "sb_publishable_zKGC1a3xHlab0ttC69Iv7Q_8cEm8gix"
-const 云端私密密钥* = "sb_secret_aQfw1RG39Az8xYgpzQv4-Q_8w2Tjgse"
 
 type
   # ============================================
@@ -100,7 +101,7 @@ proc 按键查询*(表名: string, 键: string): 云端响应 =
   result.数据 = "从云端[" & 云端URL & "]的表[" & 表名 & "]查询键[" & 键 & "]"
   echo "  [云端查询] 表:" & 表名 & " 键:" & 键
   echo "    云端URL: " & 云端URL
-  echo "    凭证层级: 发布密钥(只读) / 私密密钥(可写)"
+  echo "    凭证层级: 发布密钥(只读) / 私密密钥(仅主人持有)"
   result.状态码 = 200
 
 # ============================================
